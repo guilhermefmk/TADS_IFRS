@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #000000;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+  
+  #signup-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    padding: 2rem;
+    height: 100%;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  form {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  fieldset {
+    margin-bottom: 1.5rem;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="date"] {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #ff9900;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    border: none;
+  }
+  
+  .cta-button:hover {
+    background-color: #ffbf40;
+  }
+  
+  .image {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  
+  @media only screen and (max-width: 719px) {
+    #signup-container {
+      display: grid;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .content {
+      padding: 2rem;
+    }
+  
+    .image {
+      max-height: 50vh;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  @keyframes underlineAnimation {
+    0% {
+      text-decoration: none;
+    }
+    50% {
+      text-decoration: underline;
+    }
+    100% {
+      text-decoration: none;
+    }
+  }
+  
+  h1 {
+    animation: underlineAnimation 2s infinite;
+  }

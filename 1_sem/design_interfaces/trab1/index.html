@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <title>Título da página</title>
+    <style>
+        table,th,td {border: 2px solid black;}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Meu site</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Sobre</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div>
+        <h1>Titulo do site</h1>
+        <p>Este é um parágrafo com <i>texto em itálico</i> e <b>texto em negrito</b>.</p>
+      </div>
+      <div>
+        <h2>Lista de compras</h2>
+        <ol>
+        <li>Frutas
+                <ul>
+                <li>Banana</li>
+                <li>Maçã</li>
+                <li>Abacate</li>
+                </ul>
+        </li>
+        <li>Legumes
+                <ul>
+                <li>Cebola</li>
+                <li>Pimentão</li>
+                </ul>
+        </li>
+        <li>Cereais
+                <ul>
+                <li>Arroz</li>
+                <li>Feijão</li>
+                </ul>
+        </li>
+        </ol>
+      </div>
+      <div>
+        <table>
+            <caption>Lucro por mês</caption>
+            <thead>
+              <tr>
+                <th>Mês</th>
+                <th colspan="2">Frutas</th>
+              </tr>
+              <tr>
+                <th></th>
+                <th>Banana</th>
+                <th>Maçã</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Janeiro</td>
+                <td>100</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Fevereiro</td>
+                <td>120</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>Março</td>
+                <td>120</td>
+                <td>150</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total</td>
+                <td>340</td>
+                <td>300</td>
+              </tr>
+            </tfoot>
+          </table>
+          
+      </div>
+      <div>
+        <h1>Exemplo de imagens com links</h1>
+        <a href="https://www.ifrs.edu.br">
+            <img src="./img/ifrs.png" alt="Logo do IFRS" />
+        </a>
+        <figure>
+            <img src="./img/img2.jpg" alt="Exemplo de imagem" />
+            <figcaption>Exemplo de imagem com as tags figure e figcaption.</figcaption>
+        </figure>
+      </div>
+      <div>
+        <form>
+            <fieldset>
+              <legend>Informações Pessoais</legend>
+          
+              <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+              </div>
+          
+              <div>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+          
+              <div>
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" name="idade" min="0" max="120" required>
+              </div>
+          
+              <div>
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo" required>
+                  <option value="">Selecione...</option>
+                  <option value="masculino">Masculino</option>
+                  <option value="feminino">Feminino</option>
+                  <option value="nao-binario">Não-binário</option>
+                </select>
+              </div>
+          
+              <div>
+                <label for="mensagem">Mensagem:</label>
+                <textarea id="mensagem" name="mensagem" rows="4" cols="40"></textarea>
+              </div>
+          
+            </fieldset>
+          </form>          
+      </div>
+      <div>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/4dQtz1PpY9A" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2023 Meu site. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>

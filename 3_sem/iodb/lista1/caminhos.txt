@@ -1,0 +1,3 @@
+\i 'C:/Users/Guilherme/Documents/WORKSPACE/sql/create_structure.sql'
+
+\i 'C:/Users/Guilherme/Documents/WORKSPACE/sql/populate.sql'

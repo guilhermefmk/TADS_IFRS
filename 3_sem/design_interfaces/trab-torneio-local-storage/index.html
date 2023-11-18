@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="
+      https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js
+    "></script>
+    <script src="./script.js"></script>
+</head>
+<body>
+    <main id="main" class="container d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 20px);">
+        <div id="format">
+          <div id="numberOfTeamsSelect" class="row center text-center justify-content-center">
+            <h1>Selecione quantos times participarão<br><br></h1>        
+            <select id='numberOfTeams' class="form-select form-select-lg mb-3" aria-label="Selecione:">
+                <option selected value="4">4 times</option>
+                <option value="6">6 times</option>
+                <option value="8">8 times</option>
+                <option value="10">10 times</option>
+                <option value="12">12 times</option>
+                <option value="14">14 times</option>
+                <option value="16">16 times</option>
+                <option value="18">18 times</option>
+                <option value="20">20 times</option>
+            </select>
+        </div>
+          <div class="row mt-3 d-grip">
+              <button type="button" class="btn btn-primary" onclick="startRegistration()">Começar o torneio</button>
+          </div>
+        </div>
+        <div id="show-content"></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script>
+        Swal.fire({
+            title: '<strong>Bem vindo ao campeonato de Futebol!</strong>',
+            iconHtml: '<img width="64" height="64" src="https://img.icons8.com/arcade/64/stadium.png" alt="stadium"/>',
+            html:
+                '<b>Regras</b><br><br>' +
+                '<ul>' +
+                '<li>Este campeonato é de pontos corridos, onde cada equipe enfrenta todas as outras em 2 partidas.</li><br>' +
+                '<li>Vitórias valem 3 pontos, empates valem 1 ponto.</li><br>' +
+                '<li>Ao final do campeonato se houver dois ou mais times com a mesma pontuação na primeira colocação o critério de desempate será o saldo de gols.</li><br>' +
+                '<li>A seguir você irá selecionar quantos times irão participar do torneio.</li>' +
+                '</ul>',
+            showConfirmButton: true,
+            focusConfirm: false,
+            confirmButtonColor: '#228b22',
+            confirmButtonText:
+                'Entendi!',
+        })
+    </script>
+</body>
+</html>
