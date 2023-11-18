@@ -1,0 +1,4 @@
+\i 'C:/Users/Guilherme/Documents/WORKSPACE/iodb/tarefa1/create_structure.sql'
+
+\i 'C:/Users/Guilherme/Documents/WORKSPACE/iodb/tarefa1/populate.sql'
+

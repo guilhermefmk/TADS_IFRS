@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+
+<body>
+    <table border="1">
+        {{#vetAnotacao}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{titulo}}</td>
+            <td>{{descricao}}</td>
+            <td style="background-color: {{cor}};">{{cor}}</td>
+            <td>{{dt_hora}}</td>
+            <td><a href="/inserir_lixeira/{{id}}">Mandar para a lixeira</a></td>
+            <td><a href="/tela_alterar/{{id}}">Alterar</a></td>
+            <td><a href="/duplicar/{{id}}">Duplicar</a></td>
+        </tr>
+        {{/vetAnotacao}}
+
+    </table>
+    <a href="/tela_adicionar">Adicionar</a><br>
+    <a href="/lixeira">Lixeira</a><br>
+    <a href="/ordenada">Ordenar por data</a><br>
+    <a href="/">Ordenar por id</a>
+</body>
+
+</html>
+</ul>

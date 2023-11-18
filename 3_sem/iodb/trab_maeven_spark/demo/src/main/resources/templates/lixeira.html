@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+
+<body>
+    <table border="1">
+        {{#vetAnotacao}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{titulo}}</td>
+            <td>{{descricao}}</td>
+            <td style="background-color: {{cor}};">{{cor}}</td>
+            <td>{{dt_hora}}</td>
+            <td><a href="/deletar/{{id}}">Excluir permanentemente</a></td>
+            <td><a href="/remover_lixeira/{{id}}">Restaurar</a></td>
+        </tr>
+        {{/vetAnotacao}}
+
+    </table>
+    <a href="/">Voltar</a>
+</body>
+
+</html>
+</ul>

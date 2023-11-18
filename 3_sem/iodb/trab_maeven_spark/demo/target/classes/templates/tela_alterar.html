@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/alterar" method="post">
+        Titulo: <input type="text" name="titulo" value="{{titulo}}"> <br>
+        Descricao: <input type="text" name="descricao" value="{{descricao}}"> <br>
+        Cor: A cor atual é {{cor}} <br>
+        <select name="cor">
+            <option value="blue">blue</option>
+            <option value="yellow">yellow</option>
+            <option value="white">white</option>
+            <option value="gray">gray</option>
+        </select> <br>
+        Data: <input type="datetime-local" name="data" value="{{data}}">
+        <input type="hidden" value="{{id}}" name="id">
+        <input type="submit" value="Alterar">
+    </form>
+</body>
+</html>
