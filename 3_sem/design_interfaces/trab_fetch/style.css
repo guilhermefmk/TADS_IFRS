@@ -1,0 +1,70 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select, input, button {
+    margin-bottom: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+#paises, #consultasAPIBrail, #consultasAPIIpeaData, #promisses {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#paisesSelect, #cepInput, #dddInput, #bancoInput, #metadadosInputForm {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+#dadosPais, #resultadoCEPFixo1, #resultadoCEPFixo2, #resultadoCEPFixo3, #resultadoCEP, #resultadoDDD, #resultadoBanco, #infoTabela, #anyDiv, #raceDiv, #allDiv {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    white-space: nowrap; /* Impede a quebra de texto em telas menores */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+@media only screen and (max-width: 700px) {
+    #paises, #consultasAPIBrail, #consultasAPIIpeaData, #promisses {
+        width: 100%;
+    }
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap; /* Impede a quebra de texto em telas menores */
+    }
+
+    th, td {
+        font-size: 12px;
+        display: inline-block;
+        width: 100%; /* Evita que as células da tabela ocupem 100% da largura na exibição de bloco */
+        box-sizing: border-box;
+    }
+}

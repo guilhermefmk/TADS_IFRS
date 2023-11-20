@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Países e Consultas à Brasil API</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+        <section id="paises">
+            <h2>Paises</h2>
+            <label for="paisesSelect">Selecione um país:</label>
+            <select id="paisesSelect" onchange="carregarDadosPais()">
+                <!-- Options serão adicionadas dinamicamente aqui -->
+            </select>
+
+            <div id="dadosPais">
+                <!-- Os dados do país selecionado serão exibidos aqui -->
+            </div>
+        </section>
+
+        <section id="consultasAPIBrail">
+            <h2>Consultas à Brasil API</h2>
+
+            <!-- Consulta 1: População por UF -->
+            <div>
+                <h3>Consulta 1: Informações sobre CEP (Fixo 1)</h3>
+                <div id="resultadoCEPFixo1"></div>
+            </div>
+
+            <!-- Consulta 2: Informações sobre CEP fixo 1 -->
+            <div>
+                <h3>Consulta 2: Informações sobre CEP (Fixo 2)</h3>
+                <div id="resultadoCEPFixo2"></div>
+            </div>
+
+            <!-- Consulta 3: Informações sobre CEP fixo 2 -->
+            <div>
+                <h3>Consulta 3: Informações sobre CEP (Fixo 3)</h3>
+                <div id="resultadoCEPFixo3"></div>
+            </div>
+
+            <!-- Formulário de Consulta 4: Informações sobre CEP -->
+            <div>
+                <h3>Consulta 4: Informações sobre CEP</h3>
+                <form onsubmit="consultarCEP(); return false;">
+                    <label for="cepInput">Digite um CEP:</label>
+                    <input type="text" id="cepInput" required>
+                    <button type="submit">Consultar</button>
+                </form>
+                <div id="resultadoCEP"></div>
+            </div>
+
+            <!-- Formulário de Consulta 5: Informações por DDD -->
+            <div>
+                <h3>Consulta 5: Informações por DDD</h3>
+                <form onsubmit="consultarDDD(); return false;">
+                    <label for="dddInput">Digite um DDD:</label>
+                    <input type="text" id="dddInput" required>
+                    <button type="submit">Consultar</button>
+                </form>
+                <div id="resultadoDDD"></div>
+            </div>
+
+            <!-- Formulário de Consulta 6: Dados de uma Empresa pelo CNPJ -->
+            <div>
+                <h3>Consulta 6: Dados de um banco pelo código</h3>
+                <form onsubmit="consultarBanco(); return false;">
+                    <label for="bancoInput">Digite um código de banco:</label>
+                    <input type="text" id="bancoInput" required>
+                    <button type="submit">Consultar</button>
+                </form>
+                <div id="resultadoBanco"></div>
+            </div>
+        </section>
+
+        <section id="consultasAPIIpeaData">
+            <h2>Consultas à IpeData API</h2>
+
+            <h3>Consulta 7: Selecione o tipo de metadados</h3>
+            <form onsubmit="consultarMetadados(); return false;">
+                <label for="metadadosInputForm">Selecione o tipo de metadado:</label>
+                <select id="metadadosInputForm" onchange="carregarDadosMetadados()">
+                    <option value="SCN104_PIBIEXG104">PIB - indústria - extrativa - variação real trimestral sobre mesmo trimestre do ano anterior</option>
+                    <option value="SCN104_PIBSOSBM104" selected>PIB - serviços - outros - índice real base móvel (média do ano anterior = 100)</option>
+                    <option value="SCN104_PIBXBSZAS104">PIB - exportações - bens e serviços - índice real encadeado dessazonalizado (média 1995 = 100)</option>
+                </select>
+                <button type="submit">Gerar tabela</button>
+            </form>
+            <div id="infoTabela">
+
+            </div>
+        </section>
+
+        <section id="promisses">
+            <h2>Lidando com promisses</h2>
+        
+            <h3>Consulta 8: Promise.any</h3>
+            <button onclick="fetchDataWithPromiseAny()">Executar Promise.any</button>
+            <div id="anyDiv"></div>
+        
+            <h3>Consulta 8: Promise.race</h3>
+            <button onclick="fetchDataWithPromiseRace()">Executar Promise.race</button>
+            <div id="raceDiv"></div>
+        
+            <h3>Consulta 8: Promise.all</h3>
+            <button onclick="fetchDataWithPromiseAll()">Executar Promise.all</button>
+            <div id="allDiv"></div>
+        </section>
+    
+</body>
+</html>
