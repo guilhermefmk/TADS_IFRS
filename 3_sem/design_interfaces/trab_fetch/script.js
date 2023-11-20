@@ -96,7 +96,7 @@ function carregarDadosMetadados() {
     const metadadoSelecionado = selectMetadados.value;
 
     // Carregar os dados específicos do metadado usando destructuring
-    fetch(`https://www.ipeadata.gov.br/api/odata4/Metadados('${metadadoSelecionado}')`)
+    fetch(`http://www.ipeadata.gov.br/api/odata4/Metadados('${metadadoSelecionado}')`)
         .then(response => response.json())
         .then(({ value: [primeiroItem] }) => {
             const paragrafos = [];
@@ -126,7 +126,7 @@ function consultarMetadados() {
 
     const metadadoSelecionado = selectMetadados.value;
 
-    fetch(`https://www.ipeadata.gov.br/api/odata4/Metadados('${metadadoSelecionado}')/Valores/`)
+    fetch(`http://www.ipeadata.gov.br/api/odata4/Metadados('${metadadoSelecionado}')/Valores/`)
         .then(response => response.json())
         .then(data => {
             data = data.value
