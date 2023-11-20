@@ -42,7 +42,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     overflow-x: auto;
-    white-space: nowrap; /* Impede a quebra de texto em telas menores */
+    white-space: nowrap;
 }
 
 th, td {
@@ -58,13 +58,13 @@ th, td {
     table {
         display: block;
         overflow-x: auto;
-        white-space: nowrap; /* Impede a quebra de texto em telas menores */
+        white-space: nowrap;
     }
 
     th, td {
         font-size: 12px;
         display: inline-block;
-        width: 100%; /* Evita que as células da tabela ocupem 100% da largura na exibição de bloco */
+        width: 100%;
         box-sizing: border-box;
     }
 }

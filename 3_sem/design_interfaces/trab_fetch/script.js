@@ -17,15 +17,15 @@ function carregarPaises() {
             // Adicionar opções ao campo select
             data.forEach(pais => {
                 const option = document.createElement('option');
-                option.value = pais.sigla; // Use a sigla do país como valor
-                option.text = pais.nome_pais; // Use o nome do país como texto
+                option.value = pais.sigla; 
+                option.text = pais.nome_pais; 
                 selectPaises.appendChild(option);
             });
         })
         .catch(error => console.error('Erro ao carregar países:', error));
 }
 
-// Consulta à Brasil API: Informações sobre CEP
+
 function consultarCEP() {
     const cepInput = document.getElementById('cepInput').value;
     fetch(`https://brasilapi.com.br/api/cep/v1/${cepInput}`)
@@ -37,7 +37,7 @@ function consultarCEP() {
         .catch(error => console.error('Erro na consulta à Brasil API:', error));
 }
 
-// Consulta à Brasil API: Informações sobre CEP
+
 function consultarDDD() {
     const dddInput = document.getElementById('dddInput').value;
 
@@ -50,7 +50,7 @@ function consultarDDD() {
         .catch(error => console.error('Erro na consulta à Brasil API:', error));
 }
 
-// Consulta à Brasil API: Informações sobre CEP
+
 function consultarBanco() {
     const bancoInput = document.getElementById('bancoInput').value;
 
@@ -67,13 +67,11 @@ function carregarDadosPais() {
     const selectPaises = document.getElementById('paisesSelect');
     const dadosPaisDiv = document.getElementById('dadosPais');
 
-    // Limpar dados anteriores
+    
     dadosPaisDiv.innerHTML = '';
 
-    // Obter a sigla do país selecionado
     const siglaSelecionada = selectPaises.value;
 
-    // Carregar os dados específicos do país
     fetch('paises.json')
         .then(response => response.json())
         .then(data => {
@@ -84,7 +82,6 @@ function carregarDadosPais() {
                 return acc + `${key.charAt(0).toUpperCase() + key.slice(1)}: ${paisSelecionado[key]}, `;
             }, '');
 
-            // Adicionar o parágrafo à div
             dadosPaisDiv.innerHTML = `<p>${paragrafo.slice(0, -2)}</p>`;
         })
         .catch(error => console.error('Erro ao carregar dados do país:', error));
@@ -94,10 +91,8 @@ function carregarDadosMetadados() {
     const selectMetadados = document.getElementById('metadadosInputForm');
     const dadosMetadadosDiv = document.getElementById('infoTabela');
 
-    // Limpar dados anteriores
     dadosMetadadosDiv.innerHTML = '';
 
-    // Obter o tipo de metadado selecionado
     const metadadoSelecionado = selectMetadados.value;
 
     // Carregar os dados específicos do metadado usando destructuring
@@ -109,14 +104,12 @@ function carregarDadosMetadados() {
             // Filtrar as chaves que não têm valores vazios
             const chavesNaoVazias = Object.entries(primeiroItem).filter(([_, valor]) => valor !== '');
         
-            // Iterar sobre as chaves e valores filtrados
             chavesNaoVazias.forEach(([key, valor]) => {
                 const paragrafo = document.createElement('p');
                 paragrafo.textContent = `${key}: ${valor}`;
                 paragrafos.push(paragrafo);
             });
         
-            // Adicionar os parágrafos à div
             paragrafos.forEach(paragrafo => {
                 dadosMetadadosDiv.appendChild(paragrafo);
             });
@@ -129,35 +122,28 @@ function consultarMetadados() {
     const selectMetadados = document.getElementById('metadadosInputForm');
     const dadosMetadadosDiv = document.getElementById('infoTabela');
 
-    // Limpar dados anteriores
     dadosMetadadosDiv.innerHTML = '';
 
-    // Obter o tipo de metadado selecionado
     const metadadoSelecionado = selectMetadados.value;
 
-    // Realizar o fetch dos dados do metadado
     fetch(`https://www.ipeadata.gov.br/api/odata4/Metadados('${metadadoSelecionado}')/Valores/`)
         .then(response => response.json())
         .then(data => {
             data = data.value
             console.log(data)
             if (data.length > 0) {
-                // Criar a tabela
                 const tabela = document.createElement('table');
                 tabela.border = '1';
 
-                // Criar o cabeçalho da tabela
                 const cabecalho = tabela.createTHead();
                 const linhaCabecalho = cabecalho.insertRow();
 
-                // Adicionar cabeçalho para cada propriedade no primeiro item do JSON
                 for (const key in data[0]) {
                     const th = document.createElement('th');
                     th.textContent = key;
                     linhaCabecalho.appendChild(th);
                 }
 
-                // Adicionar as linhas da tabela com os dados
                 data.forEach(item => {
                     const linha = tabela.insertRow();
                     for (const key in item) {
@@ -166,7 +152,6 @@ function consultarMetadados() {
                     }
                 });
 
-                // Adicionar a tabela à div
                 dadosMetadadosDiv.appendChild(tabela);
             } else {
                 dadosMetadadosDiv.textContent = 'Nenhum dado encontrado.';
@@ -175,14 +160,12 @@ function consultarMetadados() {
         .catch(error => console.error('Erro ao carregar dados dos metadados:', error));
 }
 
-// Função para tratar os resultados da consulta à Brasil API
 function exibirResultadoConsulta(resultado, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = `<p>${resultado}</p>`;
 }
 
 
-// Consulta à Brasil API: Informações sobre CEP fixo
 function consultarCEPFixo(cep, containerId) {
     fetch(`https://brasilapi.com.br/api/cep/v1/${cep}`)
         .then(response => response.json())

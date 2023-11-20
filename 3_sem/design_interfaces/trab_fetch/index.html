@@ -13,36 +13,30 @@
             <h2>Paises</h2>
             <label for="paisesSelect">Selecione um país:</label>
             <select id="paisesSelect" onchange="carregarDadosPais()">
-                <!-- Options serão adicionadas dinamicamente aqui -->
             </select>
 
             <div id="dadosPais">
-                <!-- Os dados do país selecionado serão exibidos aqui -->
             </div>
         </section>
 
         <section id="consultasAPIBrail">
             <h2>Consultas à Brasil API</h2>
 
-            <!-- Consulta 1: População por UF -->
             <div>
                 <h3>Consulta 1: Informações sobre CEP (Fixo 1)</h3>
                 <div id="resultadoCEPFixo1"></div>
             </div>
 
-            <!-- Consulta 2: Informações sobre CEP fixo 1 -->
             <div>
                 <h3>Consulta 2: Informações sobre CEP (Fixo 2)</h3>
                 <div id="resultadoCEPFixo2"></div>
             </div>
 
-            <!-- Consulta 3: Informações sobre CEP fixo 2 -->
             <div>
                 <h3>Consulta 3: Informações sobre CEP (Fixo 3)</h3>
                 <div id="resultadoCEPFixo3"></div>
             </div>
 
-            <!-- Formulário de Consulta 4: Informações sobre CEP -->
             <div>
                 <h3>Consulta 4: Informações sobre CEP</h3>
                 <form onsubmit="consultarCEP(); return false;">
@@ -53,7 +47,6 @@
                 <div id="resultadoCEP"></div>
             </div>
 
-            <!-- Formulário de Consulta 5: Informações por DDD -->
             <div>
                 <h3>Consulta 5: Informações por DDD</h3>
                 <form onsubmit="consultarDDD(); return false;">
@@ -64,7 +57,6 @@
                 <div id="resultadoDDD"></div>
             </div>
 
-            <!-- Formulário de Consulta 6: Dados de uma Empresa pelo CNPJ -->
             <div>
                 <h3>Consulta 6: Dados de um banco pelo código</h3>
                 <form onsubmit="consultarBanco(); return false;">
