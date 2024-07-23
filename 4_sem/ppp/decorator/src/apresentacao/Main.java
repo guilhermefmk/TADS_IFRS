@@ -1,5 +1,7 @@
-import negocio.*;
+package src.apresentacao;
 import java.util.Arrays;
+
+import src.negocio.*;
 
 public class Main {
     public static void main(String[] args) {

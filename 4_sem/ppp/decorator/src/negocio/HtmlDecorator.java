@@ -1,4 +1,4 @@
-package negocio;
+package src.negocio;
 
 public abstract class HtmlDecorator extends Html {
 
