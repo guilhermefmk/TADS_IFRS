@@ -1,6 +1,8 @@
 {
     "maven.view": "hierarchical",
     "java.project.sourcePaths": [
-        "4_sem/ppp/prototype"
-    ]
+        "4_sem/ppp/prototype",
+        "4_sem/ppp/singleton"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }
