@@ -1,3 +1,6 @@
 {
-    "maven.view": "hierarchical"
+    "maven.view": "hierarchical",
+    "java.project.sourcePaths": [
+        "4_sem/ppp/prototype"
+    ]
 }
