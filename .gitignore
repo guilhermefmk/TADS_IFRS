@@ -1,0 +1,5 @@
+# Ignorar todos os diretórios node_modules em qualquer lugar
+**/node_modules/
+
+# Ignorar arquivos de log
+*.log

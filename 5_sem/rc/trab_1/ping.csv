@@ -1,0 +1,2 @@
+data_hora;packets_transmitted;received;packet_loss;time;min;avg;max;mdev
+2024-09-29 16:55:00;17;16;5.88235;16016;146.726;147.034;147.332;0.153
