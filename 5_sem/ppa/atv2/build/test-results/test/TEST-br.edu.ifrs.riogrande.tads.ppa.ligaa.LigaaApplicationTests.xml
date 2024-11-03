@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.edu.ifrs.riogrande.tads.ppa.ligaa.LigaaApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-03T21:04:40" hostname="guilherme-linux" time="0.672">
+  <properties/>
+  <testcase name="contextLoads()" classname="br.edu.ifrs.riogrande.tads.ppa.ligaa.LigaaApplicationTests" time="0.672"/>
+  <system-out><![CDATA[18:04:39.068 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [br.edu.ifrs.riogrande.tads.ppa.ligaa.LigaaApplicationTests]: LigaaApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:04:39.154 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration br.edu.ifrs.riogrande.tads.ppa.ligaa.LigaaApplication for test class br.edu.ifrs.riogrande.tads.ppa.ligaa.LigaaApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.4)
+
+2024-11-03T18:04:39.479-03:00  INFO 114456 --- [ligaa] [    Test worker] b.e.i.r.t.p.ligaa.LigaaApplicationTests  : Starting LigaaApplicationTests using Java 17.0.12 with PID 114456 (started by guilhermefmk in /home/guilhermefmk/Documentos/pessoal/TADS_IFRS/5_sem/ppa/aula-04-repository-logica-por-camada)
+2024-11-03T18:04:39.480-03:00  INFO 114456 --- [ligaa] [    Test worker] b.e.i.r.t.p.ligaa.LigaaApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2024-11-03T18:04:40.370-03:00  INFO 114456 --- [ligaa] [    Test worker] b.e.i.r.t.p.ligaa.LigaaApplicationTests  : Started LigaaApplicationTests in 1.099 seconds (process running for 1.999)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

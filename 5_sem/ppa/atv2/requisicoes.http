@@ -1,0 +1,118 @@
+##
+
+
+### Novo Aluno
+POST /api/v1/alunos HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "nome": "Marcio Torres",
+    "email": "marcio.torres@riogrande.ifrs.edu.br",
+    "cpf": "12345228901"
+}
+
+### GET ALL
+GET /api/v1/alunos HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+
+### GET Aluno por CPF
+GET /api/v1/alunos/1234567891 HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+
+
+### Nova Disciplina
+POST /api/v1/disciplina HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "nome": "Matemática",
+    "ementa": "Introdução à Matemática",
+    "cargaHoraria": 60,
+    "preRequisitos": ["Álgebra", "Geometria"],
+    "aulasSemanais": 4
+}
+
+### Listar todas as disciplinas
+GET /api/v1/disciplinas HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+
+### Buscar disciplina por ID
+GET /api/v1/disciplina/1 HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+
+
+### Listar todos os professores
+GET /api/v1/professores HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+
+
+### Criar novo professor
+POST /api/v1/professores HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "nome": "João Silva",
+    "cpf": "98765432100",
+    "email": "joao.silva@ifrs.edu.br"
+}
+
+### Buscar professor por ID
+GET /api/v1/professores/1 HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+
+
+
+### Excluir professor por ID
+DELETE /api/v1/professores/1 HTTP/1.1
+Host: localhost:8080
+
+### Criar nova turma
+POST /api/v1/turmas HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "disciplina": {
+        "id": 1
+    },
+    "semestre": "2024/1",
+    "sala": "101",
+    "vagas": 30,
+    "periodo": "Matutino",
+    "professor": {
+        "id": 1
+    },
+    "matriculas": []
+}
+
+### Listar todas as turmas
+GET /api/v1/turmas HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+
+### Buscar turma por ID
+GET /api/v1/turmas/1 HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+
+### Matricular aluno em uma turma
+POST /api/v1/turmas/1/alunos HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "cpfAluno": "12345228901"
+}
+
+### Desmatricular aluno de uma turma
+DELETE /api/v1/turmas/1/alunos/12345678901 HTTP/1.1
+Host: localhost:8080
