@@ -1,0 +1,55 @@
+<%- include('includes/head') %>
+
+<body>
+    <%- include('includes/nav') %>
+
+    <h1>Bem-vindo, <%= loggedInUser.name %>!</h1>
+
+    <h2>Usuários do Sistema</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Papel</th>
+                <th>Módulos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td>
+                        <img src="<%= user.imageUrl || '/default-avatar.png' %>" alt="<%= user.name %>" style="max-width: 50px;">
+                    </td>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.role %></td>
+                    <td>
+                        <ul>
+                            <% user.modules.forEach(module => { %>
+                                <li><%= module %></li>
+                            <% }); %>
+                        </ul>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <h2>Atalhos para Módulos</h2>
+    <div>
+        <!-- Lista de módulos fixos -->
+        <a href="/financeiro"><button>Financeiro</button></a>
+        <a href="/relatorios"><button>Relatórios</button></a>
+        <a href="/produtos"><button>Produtos</button></a>
+        <a href="/perfil"><button>Perfil</button></a>
+        <a href="/users"><button>Gestão de Usuários</button></a>
+    </div>
+    <br
+    <div>
+        <!-- Lista de módulos fixos -->
+        <a href="/auth/logout"><button>Sair</button></a>
+    </div>
+</body>
+</html>

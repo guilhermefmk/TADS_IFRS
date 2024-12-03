@@ -1,0 +1,16 @@
+<%- include('includes/head') %>
+
+<body>
+    <%- include('includes/nav') %>
+
+    <h1>Módulo Financeiro</h1>
+
+    <% if (user.role === 'SUPERUSER' || user.role === 'ADMIN' || user.modules.includes('Financeiro')) { %>
+        <p>Bem-vindo ao módulo financeiro.</p>
+        <!-- Implementação de funcionalidades do módulo financeiro -->
+    <% } else { %>
+        <p>Você não tem permissão para acessar este módulo.</p>
+    <% } %>
+
+</body>
+</html>

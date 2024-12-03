@@ -3,3 +3,23 @@
 
 # Ignorar arquivos de log
 *.log
+
+# Node modules
+
+# Arquivos do Prisma
+**/prisma/migrations/
+
+
+# Arquivos de banco de dados
+**/*.db
+
+# Arquivos de configuração de ambiente
+.env
+.env.*
+
+# Arquivos gerados pelo sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de log
+*.log

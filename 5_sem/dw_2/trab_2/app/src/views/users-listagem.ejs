@@ -1,0 +1,45 @@
+<%- include('includes/head') %>
+
+<body>
+    <%- include('includes/nav') %>
+
+    <h1>Gestão de Usuários</h1>
+
+    <% if (user.role === 'ADMIN' || user.role === 'SUPERUSER') { %>
+        <a href="/users/new"><button>Criar Novo Usuário</button></a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Papel</th>
+                    <th>Módulos</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.id %></td>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.role %></td>
+                        <td>
+                            <ul>
+                                <% user.modules.forEach(module => { %>
+                                    <li><%= module %></li>
+                                <% }) %>
+                            </ul>
+                        </td>
+                        <td><a href="/users/<%= user.id %>/edit">Editar</a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>Você não tem permissão para acessar este módulo.</p>
+    <% } %>
+
+</body>
+</html>

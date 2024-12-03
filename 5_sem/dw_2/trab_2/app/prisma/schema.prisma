@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  email     String      @unique
+  name      String?
+  role      String      @default("USER")
+  password  String
+  imageUrl  String?
+  endereco  Endereco?
+  modules   String      @default("[]")
+  AccessLog AccessLog[]
+}
+
+model Endereco {
+  id     Int    @id @default(autoincrement())
+  rua    String
+  numero Int
+  cidade String
+  estado String
+  userId Int    @unique
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model AccessLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int // Relaciona ao usuário que fez o acesso
+  user      User     @relation(fields: [userId], references: [id])
+  url       String // A URL acessada
+  status    String // 'allowed' ou 'denied'
+  createdAt DateTime @default(now()) // Quando o acesso foi registrado
+}

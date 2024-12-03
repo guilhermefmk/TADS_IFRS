@@ -1,0 +1,43 @@
+<%- include('includes/head') %>
+
+<body>
+    <%- include('includes/nav') %>
+
+    <h1>Meu Perfil</h1>
+
+    <form action="/perfil" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="name">Nome:</label>
+            <input type="text" name="name" value="<%= user.name %>" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" value="<%= user.email %>" required>
+        </div>
+        <div>
+            <label for="password">Senha (deixe em branco para não alterar):</label>
+            <input type="password" name="password">
+        </div>
+        <div>
+            <label for="image">Imagem:</label>
+            <input type="file" name="image" id="imageId">
+        </div>
+        <button type="submit">Salvar</button>
+    </form>
+
+    <h2>Imagem Atual</h2>
+    <img src="<%= user.imageUrl ? user.imageUrl : '/default-avatar.png' %>" alt="Imagem de perfil" style="max-width: 200px;">
+
+    <h2>Módulos</h2>
+    <ul>
+        <% const modules = JSON.parse(user.modules); %> <!-- Converte a string JSON para um array -->
+        <% if (modules.length > 0) { %>
+            <% modules.forEach(module => { %>
+                <li><%= module %></li>
+            <% }); %>
+        <% } else { %>
+            <li>Nenhum módulo associado</li>
+        <% } %>
+    </ul>
+</body>
+</html>

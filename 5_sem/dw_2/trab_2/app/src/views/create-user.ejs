@@ -1,0 +1,51 @@
+<%- include('includes/head') %>
+
+<body>
+    <%- include('includes/nav') %>
+
+    <h1>Criar Novo Usuário</h1>
+
+    <form action="/users/new" method="POST">
+        <div>
+            <label for="name">Nome:</label>
+            <input type="text" name="name" required />
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" required />
+        </div>
+        <div>
+            <label for="role">Papel:</label>
+            <select name="role" required>
+                <option value="USER">Usuário</option>
+                <% if (loggedInUser.role === 'SUPERUSER') { %>
+                    <option value="ADMIN">Administrador</option>
+                <% } %>
+            </select>
+        </div>
+        <div>
+            <label for="modules">Módulos:</label>
+            <% const availableModules = ['Financeiro', 'Relatórios', 'Produtos']; %> <!-- Lista fixa de módulos -->
+            <% availableModules.forEach(module => { %>
+                <div>
+                    <label>
+                        <input 
+                            type="checkbox" 
+                            name="modules" 
+                            value="<%= module %>" 
+                        />
+                        <%= module %>
+                    </label>
+                </div>
+            <% }) %>
+        </div>
+        <div>
+            <label for="password">Senha:</label>
+            <input type="password" name="password" required />
+        </div>
+        <button type="submit">Salvar</button>
+    </form>
+
+    <a href="/users">Voltar para a lista de usuários</a>
+</body>
+</html>
