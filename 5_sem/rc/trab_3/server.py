@@ -39,7 +39,7 @@ def processar_jogada(jogador, tabuleiro_oponente):
     while True:
         jogador.sendall("Sua vez! Escolha uma linha e uma coluna (ex: 2 3): ".encode())
         jogada = jogador.recv(BUFFER_SIZE).decode().strip()
-        print(f"Jogada recebida: {jogada}")  # Adicionando depuração
+        print(f"Jogada recebida: {jogada}")  # depuração
         try:
             linha, coluna = map(int, jogada.split())
             if 0 <= linha < 6 and 0 <= coluna < 6:
@@ -65,7 +65,7 @@ def reiniciar_jogo(jogador1, jogador2, nome1, nome2):
     jogador2.sendall("Deseja jogar novamente? (s/n): ".encode())
 
     # Usar um timeout para garantir que ambos respondam
-    jogador1.settimeout(10)  # 5 minutos de timeout
+    jogador1.settimeout(10)
     jogador2.settimeout(10)
 
     try:
@@ -135,7 +135,8 @@ def gerenciar_jogo(jogador1, jogador2, nome1, nome2):
                 jogador_atual, jogador_adversario = jogador_adversario, jogador_atual
 
             # Perguntar se os jogadores querem jogar novamente
-            continuar = reiniciar_jogo(jogador1, jogador2, nome1, nome2)
+            if not reiniciar_jogo(jogador1, jogador2, nome1, nome2):
+                break  # Sai do loop se não quiserem jogar novamente
 
     except Exception as e:
         print(f"Erro no jogo: {e}")
