@@ -65,8 +65,8 @@ def reiniciar_jogo(jogador1, jogador2, nome1, nome2):
     jogador2.sendall("Deseja jogar novamente? (s/n): ".encode())
 
     # Usar um timeout para garantir que ambos respondam
-    jogador1.settimeout(10)
-    jogador2.settimeout(10)
+    jogador1.settimeout(100)
+    jogador2.settimeout(100)
 
     try:
         # Receber respostas
@@ -112,7 +112,7 @@ def gerenciar_jogo(jogador1, jogador2, nome1, nome2):
             # Começar o jogo
             while True:
                 # Enviar apenas o tabuleiro do adversário após a jogada do atual
-                jogador_adversario.sendall(f"Vez de {nome1 if jogador_atual == jogador2 else nome2}, aguarde!\n".encode())
+                jogador_adversario.sendall(f"Vez do oponente, aguarde!\n".encode())
 
                 # O jogador realiza a jogada
                 acertou = processar_jogada(jogador_atual, tabuleiro2 if jogador_atual == jogador1 else tabuleiro1)
@@ -128,7 +128,7 @@ def gerenciar_jogo(jogador1, jogador2, nome1, nome2):
                 # Verificar se algum jogador venceu
                 if verificar_vitoria(tabuleiro2 if jogador_atual == jogador1 else tabuleiro1):
                     jogador_atual.sendall("Você venceu! Todos os navios do adversário foram afundados!\n".encode())
-                    jogador_adversario.sendall(f"{nome1 if jogador_atual == jogador2 else nome2} venceu! Todos os seus navios foram afundados.\n".encode())
+                    jogador_adversario.sendall(f"Você perdeu! Todos os seus navios foram afundados.\n".encode())
                     break
 
                 # Trocar de turno
