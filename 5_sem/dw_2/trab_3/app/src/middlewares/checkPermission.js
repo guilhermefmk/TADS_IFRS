@@ -1,4 +1,4 @@
-
+import { prisma } from '../models/prismaClient.js';
 export const checkPermission = (moduleName) => {
     return (req, res, next) => {
         const { user } = req.session;

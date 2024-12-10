@@ -1,3 +1,4 @@
+import { prisma } from '../models/prismaClient.js';
 const isAdmin = (moduleName) => {
     return (req, res, next) => {
         const { user } = req.session;

@@ -1,6 +1,3 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
 
 const isAuth = (req, res, next) => {
     // Verifica se o usuário não está logado

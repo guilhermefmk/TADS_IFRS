@@ -60,33 +60,44 @@ def processar_jogada(jogador, tabuleiro_oponente):
 
 
 def reiniciar_jogo(jogador1, jogador2, nome1, nome2):
-    # Enviar pergunta de reinício para ambos jogadores
+    # Perguntar ao primeiro jogador
     jogador1.sendall("Deseja jogar novamente? (s/n): ".encode())
-    jogador2.sendall("Deseja jogar novamente? (s/n): ".encode())
-
-    # Usar um timeout para garantir que ambos respondam
-    jogador1.settimeout(100)
-    jogador2.settimeout(100)
+    jogador1.settimeout(30)
 
     try:
-        # Receber respostas
         resposta1 = jogador1.recv(1024).decode().strip().lower()
-        resposta2 = jogador2.recv(1024).decode().strip().lower()
+        print(f"Resposta do jogador 1: {resposta1}")  # depuração
+        if resposta1 != "s":
+            # Se o primeiro jogador não quiser continuar
+            jogador1.sendall("Você escolheu não continuar. Encerrando o jogo.\n".encode())
+            jogador2.sendall(f"{nome1} não quer jogar novamente. Encerrando o jogo.\n".encode())
+            return False
 
-        # Verificar se ambos querem continuar
-        if resposta1 == "s" and resposta2 == "s":
+        # Se o primeiro jogador quer continuar, perguntar ao segundo
+        jogador2.sendall("Deseja jogar novamente? (s/n): ".encode())
+        jogador2.settimeout(30)
+
+        resposta2 = jogador2.recv(1024).decode().strip().lower()
+        print(f"Resposta do jogador 2: {resposta2}")  # depuração
+
+        if resposta2 == "s":
+            # Ambos querem continuar
             jogador1.sendall("Reiniciando jogo...\n".encode())
             jogador2.sendall("Reiniciando jogo...\n".encode())
             return True
         else:
-            # Se um dos jogadores não quiser continuar
-            jogador1.sendall(f"Resultado: {nome2} {'não' if resposta1 == 's' else ''} quer jogar novamente.\nObrigado por jogar! Até a próxima.\n".encode())
-            jogador2.sendall(f"Resultado: {nome1} {'não' if resposta2 == 's' else ''} quer jogar novamente.\nObrigado por jogar! Até a próxima.\n".encode())
+            # Segundo jogador não quer continuar
+            jogador1.sendall(f"{nome2} não quer jogar novamente. Encerrando o jogo.\n".encode())
+            jogador2.sendall("Você escolheu não continuar. Encerrando o jogo.\n".encode())
             return False
+
     except socket.timeout:
-        # Se algum jogador não responder no tempo limite
+        # Timeout em qualquer momento
         jogador1.sendall("Tempo de resposta esgotado. Encerrando o jogo.\n".encode())
         jogador2.sendall("Tempo de resposta esgotado. Encerrando o jogo.\n".encode())
+        return False
+    except Exception as e:
+        print(f"Erro no reinício do jogo: {e}")
         return False
     finally:
         # Restaurar configurações de socket

@@ -6,7 +6,6 @@ PORT = 10000
 BUFFER_SIZE = 1024
 
 
-# Cliente
 def cliente():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
         try:
@@ -16,38 +15,37 @@ def cliente():
 
             # Recebe a mensagem para digitar o nome
             msg = client_socket.recv(BUFFER_SIZE).decode()
-            print(msg, end="")  # Remover quebra de linha extra
+            print(msg, end="")
             nome = input()
             client_socket.sendall(nome.encode())
 
             # Recebe mensagens do servidor
             while True:
                 data = client_socket.recv(BUFFER_SIZE).decode()
-                print(data)  # Exibe a mensagem do servidor
+                print(data)
 
                 # Se o servidor perguntar sobre a jogada
                 if "Escolha uma linha e uma coluna" in data:
-                    jogada = input()  # Envia a jogada
+                    jogada = input()
                     client_socket.sendall(jogada.encode())
 
                 # Se o jogo terminar, com vitória ou derrota
                 if "Todos os navios do adversário foram afundados" in data or "Todos os seus navios foram afundados" in data:
-                    # Aguardar a pergunta de jogar novamente
-                    while True:
-                        data = client_socket.recv(BUFFER_SIZE).decode()
-                        print(data)
+                    # Espera pergunta de reinício
+                    restart_data = client_socket.recv(BUFFER_SIZE).decode()
+                    print(restart_data)
 
-                        if "Deseja jogar novamente?" in data:
-                            resposta = input()  # Recebe a resposta de 's' ou 'n'
-                            client_socket.sendall(resposta.encode())  # Envia a resposta
-                            break
+                    # Verifica se é pergunta de reinício
+                    if "Deseja jogar novamente?" in restart_data:
+                        resposta = input().strip().lower()
+                        client_socket.sendall(resposta.encode())
 
-                    # Aguarda a mensagem final
-                    data = client_socket.recv(BUFFER_SIZE).decode()
-                    print(data)
+                    # Recebe mensagem final
+                    final_message = client_socket.recv(BUFFER_SIZE).decode()
+                    print(final_message)
 
-                    # Verifica se o jogo terminou completamente
-                    if "Obrigado por jogar" in data:
+                    # Verifica se o jogo terminou
+                    if "Encerrando o jogo" in final_message or "Obrigado por jogar" in final_message:
                         break
 
         except KeyboardInterrupt:
