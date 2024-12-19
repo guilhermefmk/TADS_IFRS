@@ -1,0 +1,619 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "TODO API",
+      "version": "1.0.0",
+      "description": "API para gerenciamento de TODOs e categorias"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/api"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "email": {
+              "type": "string"
+            },
+            "isEmailVerified": {
+              "type": "boolean"
+            }
+          }
+        },
+        "Category": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "integer"
+            },
+            "isOwner": {
+              "type": "boolean"
+            },
+            "sharedBy": {
+              "type": "string",
+              "nullable": true
+            },
+            "sharedWith": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Todo": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "dueDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "completed": {
+              "type": "boolean"
+            },
+            "userId": {
+              "type": "integer"
+            },
+            "categoryId": {
+              "type": "integer",
+              "nullable": true
+            }
+          }
+        }
+      }
+    },
+    "paths": {
+      "/auth/register": {
+        "post": {
+          "summary": "Registrar um novo usuário",
+          "tags": ["Auth"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "password": {
+                      "type": "string",
+                      "minLength": 8
+                    }
+                  },
+                  "required": ["email", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Usuário criado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Entrada inválida"
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "summary": "Login do usuário",
+          "tags": ["Auth"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["email", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Login bem-sucedido",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Credenciais inválidas"
+            }
+          }
+        }
+      },
+      "/auth/verify/{token}": {
+        "get": {
+          "summary": "Verificar email do usuário",
+          "tags": ["Auth"],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "token",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Email verificado com sucesso"
+            },
+            "400": {
+              "description": "Token inválido ou expirado"
+            }
+          }
+        }
+      },
+      "/categories": {
+        "post": {
+          "summary": "Criar uma nova categoria",
+          "tags": ["Categories"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["name"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Categoria criada com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Entrada inválida"
+            }
+          }
+        },
+        "get": {
+          "summary": "Listar todas as categorias do usuário",
+          "tags": ["Categories"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Lista de categorias",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Category"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/{id}/share": {
+        "post": {
+          "summary": "Compartilhar uma categoria",
+          "tags": ["Categories"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    }
+                  },
+                  "required": ["email"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Categoria compartilhada com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Acesso negado ou categoria não encontrada"
+            },
+            "404": {
+              "description": "Usuário não encontrado"
+            }
+          }
+        }
+      },
+      "/categories/shared": {
+        "get": {
+          "summary": "Listar categorias compartilhadas com o usuário",
+          "tags": ["Categories"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Lista de categorias compartilhadas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Category"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/all-shared": {
+        "get": {
+          "summary": "Listar todas as categorias compartilhadas pelo e com o usuário",
+          "tags": ["Categories"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Lista de todas as categorias compartilhadas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "sharedByMe": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Category"
+                        }
+                      },
+                      "sharedWithMe": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Category"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/todos": {
+        "post": {
+          "summary": "Criar um novo TODO",
+          "tags": ["Todos"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "dueDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "categoryId": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": ["title"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "TODO criado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Todo"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Entrada inválida"
+            },
+            "403": {
+              "description": "Acesso negado à categoria"
+            }
+          }
+        },
+        "get": {
+          "summary": "Listar todos os TODOs do usuário",
+          "tags": ["Todos"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "status",
+              "schema": {
+                "type": "string",
+                "enum": ["pending", "overdue"]
+              }
+            },
+            {
+              "in": "query",
+              "name": "category",
+              "schema": {
+                "type": "integer"
+              }
+            },
+            {
+              "in": "query",
+              "name": "page",
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "in": "query",
+              "name": "limit",
+              "schema": {
+                "type": "integer",
+                "default": 10
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Lista de TODOs",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "todos": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Todo"
+                        }
+                      },
+                      "totalPages": {
+                        "type": "integer"
+                      },
+                      "currentPage": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/todos/{id}": {
+        "put": {
+          "summary": "Atualizar um TODO",
+          "tags": ["Todos"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "dueDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "completed": {
+                      "type": "boolean"
+                    },
+                    "categoryId": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "TODO atualizado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Todo"
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Acesso negado"
+            },
+            "404": {
+              "description": "TODO não encontrado"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Deletar um TODO",
+          "tags": ["Todos"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "TODO deletado com sucesso"
+            },
+            "403": {
+              "description": "Acesso negado"
+            },
+            "404": {
+              "description": "TODO não encontrado"
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  
