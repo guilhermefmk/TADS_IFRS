@@ -1,0 +1,16 @@
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/config/JPAConfig.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/model/Cliente.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/repository/ProdutoRepository.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/App.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/service/PedidoService.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/repository/ItemRepository.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/service/ProdutoService.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/service/ItemService.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/model/Item.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/service/CarrinhoService.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/service/ClienteService.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/repository/ClienteRepository.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/model/Produto.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/model/Pedido.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/repository/PedidoRepository.java
+/home/guilhermerc/Documentos/workspace/TADS_IFRS/6_sem/top_bd/jpa_redis/src/main/java/top_bd/config/RedisConfig.java
