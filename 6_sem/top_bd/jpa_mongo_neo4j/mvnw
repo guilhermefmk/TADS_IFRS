@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m"
+
+if [ ! -f "$HOME/.m2/repository/org/apache/maven/maven-core/3.8.1/maven-core-3.8.1.jar" ]; then
+  echo "Downloading Maven..."
+  curl -sSL https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/3.8.1/maven-core-3.8.1.jar -o "$HOME/.m2/repository/org/apache/maven/maven-core/3.8.1/maven-core-3.8.1.jar"
+fi
+
+exec java $MAVEN_OPTS -cp "$HOME/.m2/repository/org/apache/maven/maven-core/3.8.1/maven-core-3.8.1.jar:$HOME/.m2/repository/org/apache/maven/maven-plugin-api/3.8.1/maven-plugin-api-3.8.1.jar:$HOME/.m2/repository/org/apache/maven/maven-plugin-annotations/3.8.1/maven-plugin-annotations-3.8.1.jar" org.apache.maven.cli.MavenCli "$@"
