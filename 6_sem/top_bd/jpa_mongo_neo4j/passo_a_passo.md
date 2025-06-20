@@ -13,7 +13,7 @@ docker exec -i neo4j cypher-shell -u neo4j -p test1234 < src/main/resources/db/s
 3 - mvn clean package
 
 4 - java -jar target/social-recommendation-system-1.0-SNAPSHOT.jar
-
+OU
 5- mvn spring-boot:run
 
 6- http://localhost:8080/swagger-ui.html
