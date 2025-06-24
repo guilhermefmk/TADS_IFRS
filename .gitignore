@@ -23,3 +23,9 @@ Thumbs.db
 
 # Arquivos de log
 *.log
+
+**/target/*
+
+*.tar.gz
+
+*.ser

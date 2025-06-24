@@ -1,66 +1,48 @@
-import { SafeAreaView, ScrollView, Text } from 'react-native';
-import Post from '../components/Post';
-import { Card } from '../components/Card';
+import React from 'react';
+import { View, Text, Button, SafeAreaView } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigation } from '@react-navigation/native';
-import { STACKS } from '../constants/Screens';
-
-const dummyPosts = [
-  {
-    id: '1',
-    image: 'https://placecats.com/400/400',
-    description: 'Such a cute kitty! 😻',
-  },
-  {
-    id: '2',
-    image: 'https://placecats.com/401/400',
-    description: 'Another lovely kitten!',
-  },
-  {
-    id: '3',
-    image: 'https://placecats.com/401/400',
-    description: 'And one more kitten!',
-  },
-  {
-    id: '4',
-    image: 'https://placecats.com/401/400',
-    description: 'And ... kitten!',
-  },
-  {
-    id: '5',
-    image: 'https://placecats.com/401/400',
-    description: 'The last one!',
-  },
-];
 
 export default function HomeScreen({ navigation }) {
+  const { user, logout } = useAuth();
 
-  const { user } = useAuth();
   return (
-    <SafeAreaView className="flex-1 bg-gray-100">
-
-
-      {        user && (
-        <Text className="text-center text-lg font-bold">
-          Welcome {user.username}!
+    <SafeAreaView className="flex-1 bg-gray-100 justify-center">
+      <View className="items-center mb-8">
+        <Text className="text-lg font-bold mb-2">
+          Bem-vindo, {user?.name || user?.email || 'Usuário'}!
         </Text>
-      )}
-
-      { !user && (
-        <Text className="text-center text-lg font-bold" onPress={() => navigation.replace(STACKS.AUTHSTACK)}>
-          Login!
-        </Text>
-      )}
-
-      
-
-      <ScrollView className="p-4">
-        {dummyPosts.map(post => (
-          <Card>
-            <Post key={post.id} post={post} />
-          </Card>
-        ))}
-      </ScrollView>
+      </View>
+      <View className="mx-8">
+        <Button
+          title="Listar postagens"
+          onPress={() => navigation.navigate('PostList')}
+          color="#2563eb"
+        />
+        <View style={{ height: 12 }} />
+        <Button
+          title="Listar usuários"
+          onPress={() => navigation.navigate('UserList')}
+          color="#2563eb"
+        />
+        <View style={{ height: 12 }} />
+        <Button
+          title="Criar post"
+          onPress={() => navigation.navigate('CreatePost')}
+          color="#2563eb"
+        />
+        <View style={{ height: 12 }} />
+        <Button
+          title="Meus posts"
+          onPress={() => navigation.navigate('MyPosts')}
+          color="#2563eb"
+        />
+        <View style={{ height: 24 }} />
+        <Button
+          title="Logout"
+          onPress={logout}
+          color="#dc2626"
+        />
+      </View>
     </SafeAreaView>
   );
 }

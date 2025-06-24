@@ -1,83 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TextInput, Text, Button } from "react-native";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { PostFetch, urls } from "../services/apiBase";
+import { registerUser } from "../services/api";
 
+const RegisterScreen = ({ navigation }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-// Validation schema
-const RegisterSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
-  bio: Yup.string().required("Bio is required"),
-});
+  const handleRegister = async () => {
+    setErrorMsg('');
+    if (!name || !email || !password) {
+      setErrorMsg("Preencha todos os campos.");
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      setErrorMsg("Digite um e-mail válido.");
+      return;
+    }
+    if (password.length < 6) {
+      setErrorMsg("A senha deve ter pelo menos 6 caracteres.");
+      return;
+    }
+    try {
+      await registerUser({ name, email, password });
+      setErrorMsg('');
+      navigation.navigate('Login');
+    } catch (e) {
+      const msg = e?.response?.data?.message || "Falha ao cadastrar usuário. Verifique os dados ou tente outro e-mail.";
+      setErrorMsg(msg);
+    }
+  };
 
-const RegisterForm = () => {
   return (
-    <Formik
-      initialValues={{ name: "", email: "", password: "", bio: "" }}
-      validationSchema={RegisterSchema}
-      onSubmit={(values) => {
-        console.log("Submitted", values);
-        createUser(values)
-      }}
-    >
-      {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-        <View className="p-4">
-          <TextInput
-            className="border border-gray-300 p-2 rounded mb-2"
-            placeholder="Name"
-            onChangeText={handleChange("name")}
-            onBlur={handleBlur("name")}
-            value={values.name}
-          />
-          {touched.name && errors.name && (
-            <Text className="text-red-500 mb-2">{errors.name}</Text>
-          )}
-
-          <TextInput
-            className="border border-gray-300 p-2 rounded mb-2"
-            placeholder="Email"
-            keyboardType="email-address"
-            onChangeText={handleChange("email")}
-            onBlur={handleBlur("email")}
-            value={values.email}
-          />
-          {touched.email && errors.email && (
-            <Text className="text-red-500 mb-2">{errors.email}</Text>
-          )}
-
-          <TextInput
-            className="border border-gray-300 p-2 rounded mb-2"
-            placeholder="Password"
-            secureTextEntry
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-            value={values.password}
-          />
-          {touched.password && errors.password && (
-            <Text className="text-red-500 mb-2">{errors.password}</Text>
-          )}
-
-          <TextInput
-            className="border border-gray-300 p-2 rounded mb-2"
-            placeholder="Bio"
-            onChangeText={handleChange("bio")}
-            onBlur={handleBlur("bio")}
-            value={values.bio}
-          />
-          {touched.bio && errors.bio && (
-            <Text className="text-red-500 mb-2">{errors.bio}</Text>
-          )}
-
-          <Button title="Register" onPress={handleSubmit} />
-        </View>
-      )}
-    </Formik>
+    <View style={{ padding: 16 }}>
+      <Text style={{ fontSize: 22, marginBottom: 16 }}>Cadastro</Text>
+      {errorMsg ? (
+        <Text style={{ color: 'red', marginBottom: 8 }}>{errorMsg}</Text>
+      ) : null}
+      <TextInput
+        placeholder="Nome"
+        value={name}
+        onChangeText={setName}
+        style={{borderWidth:1, margin:4, padding:4, borderRadius: 6}}
+      />
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        style={{borderWidth:1, margin:4, padding:4, borderRadius: 6}}
+      />
+      <TextInput
+        placeholder="Senha"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={{borderWidth:1, margin:4, padding:4, borderRadius: 6}}
+      />
+      <Button title="Cadastrar" onPress={handleRegister} />
+      <View style={{ height: 8 }} />
+      <Button title="Voltar ao Login" onPress={() => navigation.navigate('Login')} />
+    </View>
   );
 };
 
-export default RegisterForm;
+export default RegisterScreen;

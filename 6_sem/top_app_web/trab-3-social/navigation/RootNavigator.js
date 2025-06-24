@@ -1,28 +1,17 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import MainStack from './MainStack';
 import AuthStack from './AuthStack';
-import { NavigationContainer } from '@react-navigation/native';
-import { STACKS } from '../constants/Screens';
 import { useAuth } from '../contexts/AuthContext';
 
-const Stack = createStackNavigator();
-
 const RootNavigator = () => {
+  const { user, loading } = useAuth();
 
-  const { user } = useAuth();
+  if (loading) return null; 
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false,  }}
-      /* initialRouteName='MainStack' */>
-     
-        <Stack.Screen name="MainStack" component={MainStack} />
-        <Stack.Screen name={STACKS.AUTHSTACK} component={AuthStack} />
-        
-        
-        
-      </Stack.Navigator>
+      {user ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };
