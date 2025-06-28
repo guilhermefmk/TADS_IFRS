@@ -12,7 +12,27 @@ api.interceptors.request.use(async (config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
+}, (error) => {
+  return Promise.reject(error);
 });
+
+export const PostFetchMultiform = async (url, params) => {
+  try {
+    const response = await api.post(url, params, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log({
+      msg: "Error in PostFetchMultiform --> " + url,
+      error,
+      params
+    });
+    throw error;
+  }
+}
 
 // Cadastro de usuário
 export const registerUser = (data) => api.post('/users', data);
@@ -23,14 +43,9 @@ export const getUsers = (params) => api.get('/users', { params });
 // Listagem de posts
 export const getPosts = (params) => api.get('/posts', { params });
 // Criação de post
-export const createPost = (formData) =>
-  api.post('/posts', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      'Accept': '*/*'
-    },
-    transformRequest: data => data
-  });
+export const createPost = async (postData) => {
+  return await PostFetchMultiform("/posts", postData);
+}
 // Exclusão de post
 export const deletePost = (id) => api.delete(`/posts/${id}`);
 export const getMyPosts = () => api.get('/my-posts');

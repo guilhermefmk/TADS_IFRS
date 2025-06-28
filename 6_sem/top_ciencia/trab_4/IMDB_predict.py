@@ -48,9 +48,9 @@ def predict_class(duration_minutes, budget, gross_world_wide):
 
 
 # Exemplo de uso
-duration_minutes = 100
-budget = 500000
-gross_world_wide = 200000
+duration_minutes = 120
+budget = 15000000
+gross_world_wide = 1200000
 
 predicted_class = predict_class(duration_minutes, budget, gross_world_wide)
 print(f"Classe prevista: {predicted_class}")
